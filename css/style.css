@@ -80,6 +80,71 @@ ul.jobInfo {
 }
 
 /* --popup-- */
+
+/* --popupCustomer-- */
+.popupCustomer {
+  width: 400px;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  padding: 0 30px 30px;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  background-color: #dddddd;
+  border-style: solid;
+  border-color: black;
+}
+.idpopupCustomer {
+  display: none;
+}
+.open-popupCustomer {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+.close-popupCustomer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+/* --popupTask-- */
+.popupTask {
+  width: 400px;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  padding: 0 30px 30px;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  background-color: #dddddd;
+  border-style: solid;
+  border-color: black;
+}
+
+.idpopupTask {
+  display: none;
+}
+.open-popupTask {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+.close-popupTask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+/* --popupEmployee-- */
 .popupEmployee {
   width: 400px;
   border-radius: 6px;
@@ -90,23 +155,25 @@ ul.jobInfo {
   padding: 0 30px 30px;
   visibility: hidden;
   transition: transform 0.4s, top 0.4s;
+  background-color: #dddddd;
+  border-style: solid;
+  border-color: black;
 }
-.popup {
+.idpopupEmployee {
   display: none;
 }
-.open-popup {
+.open-popupEmployee {
   visibility: visible;
   top: 50%;
   transform: translate(-50%, -50%) scale(1);
 }
-.close-popup {
+.close-popupEmployee {
   position: absolute;
   top: 0;
   right: 0;
   padding: 10px 15px;
   cursor: pointer;
 }
-
 
 
 

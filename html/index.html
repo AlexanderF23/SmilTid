@@ -34,12 +34,11 @@
       <h3 class="toolNameMenu">Menu</h3>
       <ul class="menuButton">
 
-        <li> <button id="popupButton" class="createCostumer" onclick="openPopup()">Opret ny kunde</button> </li>
+        <li> <button id="popupButtonCostumer" class="createCostumer" onclick="openCustumerPopup()">Opret ny kunde</button> </li>
 
+        <li> <button id="popupButtonTask" class="createTask" onclick="openTaskPopup()">Opret Opgave</button> </li>
 
-        <li> <button class="createTask">Opret Opgave</button> </li>
-
-        <li> <button class="createEmployee">Opret ansat</button> </li>
+        <li> <button id="popupButtonEmployee" class="createEmployee" onclick="openEmployee()">Opret ansat</button> </li>
 
       </ul>
 
@@ -62,12 +61,27 @@
   </div>
 
   <!-- popup -->
-  <div class="popupEmployee" id="popup">
+  <div class="popupCustomer" id="idPopupCustomer">
+    <h2>Tilføj ny ansat</h2>
+    <label for="kname">Kundes Navn</label>
+    <input type="text" id="kname" name="fname"><br><br>
+    <button type="button" id="submit" class="close-popup-customer-button" onclick="closeCustomerPopup()">Tilføj</button>
+  </div>
+
+  <div class="popupTask" id="idPopupTask">
+    <h2>Tilføj ny Opgave</h2>
+    <label for="tname">Opgave Navn</label>
+    <input type="text" id="tname" name="tname"><br><br>
+    <button type="button" id="submit" class="close-popup-task-button" onclick="closeTaskPopup()">Tilføj</button>
+  </div>
+
+  <div class="popupEmployee" id="idPopupEmployee">
     <h2>Tilføj ny ansat</h2>
     <label for="fname">Navn</label>
     <input type="text" id="fname" name="fname"><br><br>
-    <button type="button" id="submit" class="close-popup-button" onclick="closePopup()">Tilføj</button>
+    <button type="button" id="submit" class="close-popup-Employee-button" onclick="closeEmployeePopup()">Tilføj</button>
   </div>
+
 
 
 
