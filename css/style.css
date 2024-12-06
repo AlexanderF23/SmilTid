@@ -79,6 +79,66 @@ ul.jobInfo {
   padding-left: 20px ;
 }
 
+/* --TimeRegister--*/
+.tRMain {
+  margin: auto;
+  width: 50%;
+  border: 3px outset;
+  padding: 50px 20px 50px 20px;
+  font-size: 20px;
+}
+.tRMainCenter {
+  text-align: center;
+}
+
+.tRCommentField {
+  width: 30%;
+  height: 50px;
+}
+.tRCostomer label {
+  font-size: 30px;
+}
+.tRCostomer select{
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  margin-right: 80px;
+}
+.tRDate{
+  padding: 20px;
+}
+.tRDate input {
+  width: 145px;
+  height: 50px;
+  font-size: 20px;
+  margin-right: 66px;
+}
+.tRTime {
+  padding: 10px;
+}
+.tRTime input {
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+  margin-right: 66px;
+}
+.tRTask {
+  padding: 10px;
+}
+.tRTask select {
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  margin-right: 88px;
+}
+.tRComment {
+  margin-right: 120px;
+}
+.tRSubmitButton {
+  padding: 20px;
+
+}
+
 /* --popup-- */
 
 /* --popupCustomer-- */
@@ -96,6 +156,7 @@ ul.jobInfo {
   border-style: solid;
   border-color: black;
 }
+
 .idpopupCustomer {
   display: none;
 }
