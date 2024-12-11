@@ -41,9 +41,11 @@
 
         <li> <button id="popupButtonEmployee" class="createEmployee" onclick="openEmployee()">Opret ansat</button> </li>
 
+        <li> <a href="timeRegister.html" class="goToTR"><button>Registrer Tid</button></a></li>
+
       </ul>
 
-    </div>
+    </div> <!-- toolMenu div -->
 
 
     <div class="taskMenu">
@@ -58,8 +60,8 @@
           <td>Tipa</td>
       </table>
 
-    </div>
-  </div>
+    </div> <!-- taskMenu div -->
+  </div> <!-- grid-container div -->
 
   <!-- popup -->
   <div class="popupCustomer" id="idPopupCustomer">
@@ -67,21 +69,21 @@
     <label for="kname">Kundes Navn</label>
     <input type="text" id="kname" name="fname"><br><br>
     <button type="button" id="submit" class="close-popup-customer-button" onclick="closeCustomerPopup()">Tilføj</button>
-  </div>
+  </div> <!-- popupCustomer div -->
 
   <div class="popupTask" id="idPopupTask">
     <h2>Tilføj ny Opgave</h2>
     <label for="tname">Opgave Navn</label>
     <input type="text" id="tname" name="tname"><br><br>
     <button type="button" id="submit" class="close-popup-task-button" onclick="closeTaskPopup()">Tilføj</button>
-  </div>
+  </div> <!-- popupTask div -->
 
   <div class="popupEmployee" id="idPopupEmployee">
     <h2>Tilføj ny ansat</h2>
     <label for="fname">Navn</label>
     <input type="text" id="fname" name="fname"><br><br>
     <button type="button" id="submit" class="close-popup-Employee-button" onclick="closeEmployeePopup()">Tilføj</button>
-  </div>
+  </div> <!-- popupEmployee div -->
   <!-- test -->
 
 
