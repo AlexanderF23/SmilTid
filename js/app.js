@@ -2,7 +2,8 @@ if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     console.log('app.js is running');
 
-
+    const customerSelect = document.getElementById('customer');
+    const taskSelect = document.getElementById('task');
 
     // Fetch customer data
     fetch('http://localhost:3000/customers')
@@ -13,17 +14,12 @@ if (typeof document !== 'undefined') {
         return response.json();
       })
       .then(data => {
-        console.log(data); // Log the response to inspect it
-        const customerSelect = document.getElementById('customer');
-        if (!customerSelect) {
-          console.error('Dropdown element with id "costomer" not found');
-          return;
-        }
-        customerSelect.innerHTML = ''; // Clear existing options
-        data.forEach(customers => {
+        console.log('Customer data:', data);
+        customerSelect.innerHTML = '<option value="">Vælg</option>'; // Clear existing options
+        data.forEach(customer => {
           const option = document.createElement('option');
-          option.value = customers.customerID; // Ensure this matches the actual property name
-          option.textContent = customers.Name; // Ensure this matches the actual property name
+          option.value = customer.customerID; // Ensure this matches the actual property name
+          option.textContent = customer.Name; // Ensure this matches the actual property name
           customerSelect.appendChild(option);
         });
       })
@@ -34,6 +30,41 @@ if (typeof document !== 'undefined') {
         errorMessage.style.color = 'red';
         document.body.appendChild(errorMessage);
       });
+
+    // Fetch tasks based on selected customer
+    customerSelect.addEventListener('change', () => {
+      const customerId = customerSelect.value;
+      if (!customerId) {
+        taskSelect.innerHTML = '<option value="">Vælg opgave</option>'; // Clear tasks if no customer is selected
+        return;
+      }
+
+      fetch(`http://localhost:3000/customers/${customerId}/task`)
+        .then(response => {
+          console.log('Fetch response:', response);
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Task data:', data);
+          taskSelect.innerHTML = '<option value="">Vælg opgave</option>'; // Clear existing options
+          data.forEach(task => {
+            const option = document.createElement('option');
+            option.value = task.taskID; // Ensure this matches the actual property name
+            option.textContent = task.Name; // Ensure this matches the actual property name
+            taskSelect.appendChild(option);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching task data:', error);
+          const errorMessage = document.createElement('p');
+          errorMessage.textContent = 'Failed to load task data. Please try again later.';
+          errorMessage.style.color = 'red';
+          document.body.appendChild(errorMessage);
+        });
+    });
   });
 }
 
