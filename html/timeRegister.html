@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/app.js"></script>
   <script src="../js/db.js"></script>
+  <script src="../js/Server.js"></script>
 </head>
 <body>
 
@@ -16,13 +17,21 @@
     <div class="tRButtons">
       <div class="tRCostomer">
         <form>
-          <lable for="Kunde">Kunde:</lable>
-            <select name="Kunde" id="costomer">
-              <option value="costomer0">Vælg kunde</option>
-              <option value="costomer1">Tipa</option>
+          <lable for="costomer">Kunde:</lable>
+            <select id="customer">
+              <option value="">Vælg</option>
             </select>
         </form>
       </div> <!-- tRCostomer div -->
+
+      <div class="tRTask">
+        <form>
+          <lable for="Task">Opgave:</lable>
+          <select name="Task" id="Task">
+            <option value="">Vælg opgave</option>
+          </select>
+        </form>
+      </div> <!-- tRTask div -->
 
       <div class="tRDate">
         <form>
@@ -39,17 +48,6 @@
             <input type="time" id="timeTo" name="time">
         </form>
       </div> <!-- tRTime div -->
-
-      <div class="tRTask">
-        <form>
-          <lable for="Task">Opgave:</lable>
-            <select name="Task" id="Task">
-              <option value="task0">Vælg opgave</option>
-              <option value="task1">Social medie</option>
-              <option value="task2">Hjemmeside</option>
-            </select>
-        </form>
-      </div> <!-- tRTask div -->
 
       <div class="tRComment">
         <form>

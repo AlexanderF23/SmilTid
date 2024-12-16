@@ -1005,7 +1005,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="291" parent="1" name="smiltiddb">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-12-11.13:38:30</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-12-16.14:36:45</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="292" parent="1" name="sys">
@@ -1030,7 +1030,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="297" parent="291" name="customers">
+    <table id="297" parent="291" name="customer">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
@@ -1046,7 +1046,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="301" parent="297" name="CustomerID">
+    <column id="301" parent="297" name="customerID">
       <AutoIncrement>3</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1058,7 +1058,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
     <index id="303" parent="297" name="PRIMARY">
-      <ColNames>CustomerID</ColNames>
+      <ColNames>customerID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
@@ -1110,7 +1110,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <foreign-key id="313" parent="299" name="tasks_ibfk_1">
       <ColNames>CustomerID</ColNames>
-      <RefColNames>CustomerID</RefColNames>
+      <RefColNames>customerID</RefColNames>
       <RefTableName>customers</RefTableName>
     </foreign-key>
     <index id="314" parent="299" name="PRIMARY">

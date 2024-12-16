@@ -39,7 +39,6 @@ ul.menuButton {
 }
 li > button {
   width: 110px;
-
 }
 
 
@@ -124,7 +123,7 @@ ul.jobInfo {
   margin-right: 66px;
 }
 .tRTask {
-  padding: 10px;
+  padding-top: 20px;
 }
 .tRTask select {
   width: 150px;
