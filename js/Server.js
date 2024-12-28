@@ -72,3 +72,45 @@ app.post('/save', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
+// save new customer
+app.post('/customers', (req, res) => {
+  const { name } = req.body;
+
+  if (!name || name.trim() === '') {
+    return res.status(400).json({ error: 'Customer name cannot be empty.' });
+  }
+  if (name.length < 3) {
+    return res.status(400).json({ error: 'Customer name must be at least 3 characters long.' });
+  }
+
+  const query = 'INSERT INTO customer (Name) VALUES (?);';
+
+  db.query(query, [name], (err, results) => {
+    if (err) {
+      console.error('Error saving customer:', err);
+      return res.status(500).json({ error: 'Database query error' });
+    }
+    res.status(200).json({ message: 'Customer saved successfully', customerId: results.insertId });
+  });
+});
+
+// save new task
+app.post('/tasks', (req, res) => {
+  const { customerId, name } = req.body;
+
+  if (!customerId || !name || name.trim() === '') {
+    return res.status(400).json({ error: 'Customer ID and task name are required.' });
+  }
+
+  const query = 'INSERT INTO task (customerID, Name) VALUES (?, ?);';
+
+  db.query(query, [customerId, name], (err, results) => {
+    if (err) {
+      console.error('Error saving task:', err);
+      return res.status(500).json({ error: 'Database query error' });
+    }
+    res.status(200).json({ message: 'Task saved successfully', taskId: results.insertId });
+  });
+});

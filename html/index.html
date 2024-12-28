@@ -66,19 +66,26 @@
 
   <!-- popup -->
   <div class="popupCustomer" id="idPopupCustomer">
-    <h2>Tilføj ny ansat</h2>
+    <h2>Tilføj ny Kunde</h2>
     <label for="kname">Kundes Navn</label>
     <input type="text" id="kname" name="fname"><br><br>
-    <button type="button" id="submit" class="close-popup-customer-button" onclick="closeCustomerPopup()">Tilføj</button>
-    <button type="button" id="cancel" class="close-popup-customer-button" onclick="closeCustomerPopup()">Luk</button>
+    <button type="button" id="submit" class="close-popup-customer-button submit">Tilføj</button>
+    <button type="button" id="cancel" class="close-popup-customer-button cancel">Luk</button>
   </div> <!-- popupCustomer div -->
 
   <div class="popupTask" id="idPopupTask">
+    <h2>Vælg kunde først</h2>
+    <form>
+      <lable for="customer">Kunde:</lable>
+      <select id="customer">
+        <option value="">Vælg</option>
+      </select>
+    </form>
     <h2>Tilføj ny Opgave</h2>
     <label for="tname">Opgave Navn</label>
     <input type="text" id="tname" name="tname"><br><br>
-    <button type="button" id="submit" class="close-popup-task-button" onclick="closeTaskPopup()">Tilføj</button>
-    <button type="button" id="cancel" class="close-popup-task-button cancel" onclick="closeTaskPopup()">Luk</button>
+    <button type="button" class="close-popup-task-button submit">Tilføj</button>
+    <button type="button" class="close-popup-task-button cancel">Luk</button>
   </div> <!-- popupTask div -->
 
 

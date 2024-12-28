@@ -119,29 +119,76 @@ if (typeof document !== 'undefined') {
 
 //popup Scripts
 //popupCustomer
-  document.addEventListener('DOMContentLoaded', function () {
-    let popupCustomer = document.getElementById('idPopupCustomer');
-    let popupButtonCustomer = document.getElementById('popupButtonCostumer');
-    let cancelButtonCustomer = document.getElementById('cancel');
+document.addEventListener('DOMContentLoaded', function () {
+  let popupCustomer = document.getElementById('idPopupCustomer');
+  let popupButtonCustomer = document.getElementById('popupButtonCostumer');
+  let submitButtonCustomer = document.querySelector('#idPopupCustomer .close-popup-customer-button.submit');
+  let cancelButtonCustomer = document.querySelector('#idPopupCustomer .close-popup-customer-button.cancel');
 
- function openCustomerPopup() {
+  function openCustomerPopup() {
     popupCustomer.classList.add("open-popupCustomer");
- }
+  }
 
   function closeCustomerPopup() {
-     popupCustomer.classList.remove("open-popupCustomer");
-   }
+    popupCustomer.classList.remove("open-popupCustomer");
+  }
+
+  function validateCustomerInput(name) {
+    if (!name || name.trim() === '') {
+      alert('Customer name cannot be empty.');
+      return false;
+    }
+    if (name.length < 3) {
+      alert('Customer name must be at least 3 characters long.');
+      return false;
+    }
+    return true;
+  }
+
+  function saveCustomer() {
+    const customerName = document.getElementById('kname').value;
+
+    if (!validateCustomerInput(customerName)) {
+      return;
+    }
+
+    const data = { name: customerName };
+
+    fetch('http://localhost:3000/customers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Customer saved:', data);
+        alert('Customer saved successfully.');
+        closeCustomerPopup();
+      })
+      .catch(error => {
+        console.error('Error saving customer:', error);
+        alert('Failed to save customer. Please try again later.');
+      });
+  }
 
   popupButtonCustomer.addEventListener('click', openCustomerPopup);
-   document.querySelector('.close-popup-customer-button').addEventListener('click', closeCustomerPopup);
+  submitButtonCustomer.addEventListener('click', saveCustomer);
   cancelButtonCustomer.addEventListener('click', closeCustomerPopup);
- });
+});
 
 
 //popupTask
 document.addEventListener('DOMContentLoaded', function () {
   let popupTask = document.getElementById('idPopupTask');
   let popupButtonTask = document.getElementById('popupButtonTask');
+  let submitButtonTask = document.querySelector('#idPopupTask .close-popup-task-button.submit');
   let cancelButtonTask = document.querySelector('#idPopupTask .close-popup-task-button.cancel');
 
   function openTaskPopup() {
@@ -152,9 +199,53 @@ document.addEventListener('DOMContentLoaded', function () {
     popupTask.classList.remove("open-popupTask");
   }
 
+  function saveTask() {
+    const customerId = document.getElementById('customer').value;
+    const taskName = document.getElementById('tname').value;
+
+    if (!customerId) {
+      alert('Please select a customer.');
+      return;
+    }
+
+    if (!taskName || taskName.trim() === '') {
+      alert('Task name cannot be empty.');
+      return;
+    }
+
+    const data = { customerId, name: taskName };
+
+    fetch('http://localhost:3000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Task saved:', data);
+        alert('Task saved successfully.');
+        closeTaskPopup();
+      })
+      .catch(error => {
+        console.error('Error saving task:', error);
+        alert('Failed to save task. Please try again later.');
+      });
+  }
+
   popupButtonTask.addEventListener('click', openTaskPopup);
+  submitButtonTask.addEventListener('click', saveTask);
   cancelButtonTask.addEventListener('click', closeTaskPopup);
 });
+
+
+/*
 
 //popupEmployee
  document.addEventListener('DOMContentLoaded', function () {
@@ -174,6 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
    document.querySelector('.close-popup-Employee-button').addEventListener('click', closeEmployeePopup);
    cancelButtonEmployee.addEventListener('click', closeEmployeePopup);
  });
+
+ */
 
 
 
