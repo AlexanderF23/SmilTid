@@ -269,5 +269,32 @@ document.addEventListener('DOMContentLoaded', function () {
  */
 
 
+//display customer data on index page
+document.addEventListener('DOMContentLoaded', function () {
+  function fetchCustomers() {
+    fetch('http://localhost:3000/customers')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(customers => {
+        const taskTable = document.querySelector('.taskTable');
+        customers.forEach(customer => {
+          const row = document.createElement('tr');
+          const cell = document.createElement('td');
+          cell.textContent = customer.Name; // Ensure the property name matches the server response
+          row.appendChild(cell);
+          taskTable.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching customers:', error);
+      });
+  }
+
+  fetchCustomers();
+});
 
 

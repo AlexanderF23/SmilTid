@@ -114,3 +114,16 @@ app.post('/tasks', (req, res) => {
     res.status(200).json({ message: 'Task saved successfully', taskId: results.insertId });
   });
 });
+
+
+//show customer data on index page
+app.get('/customers', (req, res) => {
+  const query = 'SELECT customerID, Name FROM customer';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Database query error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    res.status(200).json(results);
+  });
+});
