@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/app.js"></script>
   <script src="../js/db.js"></script>
+  <script src="../js/Server.js"></script>
   <meta name="description" content="">
 
   <meta property="og:title" content="">
@@ -39,7 +40,7 @@
 
         <li> <button id="popupButtonTask" class="createTask" onclick="openTaskPopup()">Opret Opgave</button> </li>
 
-        <li> <button id="popupButtonEmployee" class="createEmployee" onclick="openEmployee()">Opret ansat</button> </li>
+        <!-- <li> <button id="popupButtonEmployee" class="createEmployee" onclick="openEmployee()">Opret ansat</button> </li> -->
 
         <li> <a href="timeRegister.html" class="goToTR"><button>Registrer Tid</button></a></li>
 
@@ -69,6 +70,7 @@
     <label for="kname">Kundes Navn</label>
     <input type="text" id="kname" name="fname"><br><br>
     <button type="button" id="submit" class="close-popup-customer-button" onclick="closeCustomerPopup()">Tilføj</button>
+    <button type="button" id="cancel" class="close-popup-customer-button" onclick="closeCustomerPopup()">Luk</button>
   </div> <!-- popupCustomer div -->
 
   <div class="popupTask" id="idPopupTask">
@@ -76,15 +78,10 @@
     <label for="tname">Opgave Navn</label>
     <input type="text" id="tname" name="tname"><br><br>
     <button type="button" id="submit" class="close-popup-task-button" onclick="closeTaskPopup()">Tilføj</button>
+    <button type="button" id="cancel" class="close-popup-task-button cancel" onclick="closeTaskPopup()">Luk</button>
   </div> <!-- popupTask div -->
 
-  <div class="popupEmployee" id="idPopupEmployee">
-    <h2>Tilføj ny ansat</h2>
-    <label for="fname">Navn</label>
-    <input type="text" id="fname" name="fname"><br><br>
-    <button type="button" id="submit" class="close-popup-Employee-button" onclick="closeEmployeePopup()">Tilføj</button>
-  </div> <!-- popupEmployee div -->
-  <!-- test -->
+
 
 
 

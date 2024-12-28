@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
-const cors = require('cors'); // Tilføjet CORS
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
@@ -8,7 +8,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Database forbindelse
+// Database connection
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -24,7 +24,7 @@ db.connect((err) => {
   console.log('Connected to database');
 });
 
-// Hent kunder
+// Fetch customers
 app.get('/customers', (req, res) => {
   const query = 'SELECT customerID, Name FROM customer';
   db.query(query, (err, results) => {
@@ -36,7 +36,7 @@ app.get('/customers', (req, res) => {
   });
 });
 
-// Hent opgaver for en kunde
+// Fetch tasks for a customer
 app.get('/customers/:customerID/task', (req, res) => {
   const customerID = req.params.customerID;
   const query = `
@@ -50,6 +50,22 @@ app.get('/customers/:customerID/task', (req, res) => {
       return res.status(500).json({ error: 'Database query error' });
     }
     res.status(200).json(results);
+  });
+});
+
+// Save data
+app.post('/save', (req, res) => {
+  const { customerId, taskId, date, timeFrom, timeTo, comment } = req.body;
+  const query = `
+    INSERT INTO time_registration (customerID, taskID, date, timeFrom, timeTo, comment)
+    VALUES (?, ?, ?, ?, ?, ?);
+  `;
+  db.query(query, [customerId, taskId, date, timeFrom, timeTo, comment], (err, results) => {
+    if (err) {
+      console.error('Error saving data:', err);
+      return res.status(500).json({ error: 'Database query error' });
+    }
+    res.status(200).json({ message: 'Data saved successfully' });
   });
 });
 

@@ -4,6 +4,7 @@ if (typeof document !== 'undefined') {
 
     const customerSelect = document.getElementById('customer');
     const taskSelect = document.getElementById('task');
+    const saveButton = document.querySelector('.tRButtonSave');
 
     // Fetch customer data
     fetch('http://localhost:3000/customers')
@@ -65,61 +66,114 @@ if (typeof document !== 'undefined') {
           document.body.appendChild(errorMessage);
         });
     });
+
+    // Save data to the database
+    saveButton.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const customerId = customerSelect.value;
+      const taskId = taskSelect.value;
+      const date = document.getElementById('date').value;
+      const timeFrom = document.getElementById('timeFrom').value;
+      const timeTo = document.getElementById('timeTo').value;
+      const comment = document.getElementById('comment').value;
+
+      if (!customerId || !taskId || !date || !timeFrom || !timeTo) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const data = {
+        customerId,
+        taskId,
+        date,
+        timeFrom,
+        timeTo,
+        comment
+      };
+
+      fetch('http://localhost:3000/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Data saved:', data);
+          alert('Data saved successfully.');
+        })
+        .catch(error => {
+          console.error('Error saving data:', error);
+          alert('Failed to save data. Please try again later.');
+        });
+    });
   });
 }
 
 //popup Scripts
 //popupCustomer
-  //document.addEventListener('DOMContentLoaded', function () {
-    //let popupCustomer = document.getElementById('idPopupCustomer');
-    //let popupButtonCustomer = document.getElementById('popupButtonCostumer');
+  document.addEventListener('DOMContentLoaded', function () {
+    let popupCustomer = document.getElementById('idPopupCustomer');
+    let popupButtonCustomer = document.getElementById('popupButtonCostumer');
+    let cancelButtonCustomer = document.getElementById('cancel');
 
-// function openCustomerPopup() {
-//    popupCustomer.classList.add("open-popupCustomer");
-//  }
+ function openCustomerPopup() {
+    popupCustomer.classList.add("open-popupCustomer");
+ }
 
-//  function closeCustomerPopup() {
-//     popupCustomer.classList.remove("open-popupCustomer");
-//   }
+  function closeCustomerPopup() {
+     popupCustomer.classList.remove("open-popupCustomer");
+   }
 
-//   popupButtonCustomer.addEventListener('click', openCustomerPopup);
-//   document.querySelector('.close-popup-customer-button').addEventListener('click', closeCustomerPopup);
-// });
+  popupButtonCustomer.addEventListener('click', openCustomerPopup);
+   document.querySelector('.close-popup-customer-button').addEventListener('click', closeCustomerPopup);
+  cancelButtonCustomer.addEventListener('click', closeCustomerPopup);
+ });
 
 
 //popupTask
-// document.addEventListener('DOMContentLoaded', function () {
-//   let popupTask = document.getElementById('idPopupTask');
-//   let popupButtonTask = document.getElementById('popupButtonTask');
+document.addEventListener('DOMContentLoaded', function () {
+  let popupTask = document.getElementById('idPopupTask');
+  let popupButtonTask = document.getElementById('popupButtonTask');
+  let cancelButtonTask = document.querySelector('#idPopupTask .close-popup-task-button.cancel');
 
-//    function openTaskPopup() {
-//      popupTask.classList.add("open-popupTask");
-//    }
+  function openTaskPopup() {
+    popupTask.classList.add("open-popupTask");
+  }
 
-//    function closeTaskPopup() {
-//      popupTask.classList.remove("open-popupTask");
-//    }
+  function closeTaskPopup() {
+    popupTask.classList.remove("open-popupTask");
+  }
 
-//   popupButtonTask.addEventListener('click', openTaskPopup);
-//   document.querySelector('.close-popup-task-button').addEventListener('click', closeTaskPopup);
-// });
+  popupButtonTask.addEventListener('click', openTaskPopup);
+  cancelButtonTask.addEventListener('click', closeTaskPopup);
+});
 
 //popupEmployee
-// document.addEventListener('DOMContentLoaded', function () {
-//   let popupEmployee = document.getElementById('idPopupEmployee');
-//   let popupButtonEmployee = document.getElementById('popupButtonEmployee');
+ document.addEventListener('DOMContentLoaded', function () {
+   let popupEmployee = document.getElementById('idPopupEmployee');
+   let popupButtonEmployee = document.getElementById('popupButtonEmployee');
+   let cancelButtonEmployee = document.getElementById('cancel');
 
-//   function openEmployeePopup() {
-//      popupEmployee.classList.add("open-popupEmployee");
-//    }
+   function openEmployeePopup() {
+      popupEmployee.classList.add("open-popupEmployee");
+    }
 
-//    function closeEmployeePopup() {
-//     popupEmployee.classList.remove("open-popupEmployee");
-//    }
+    function closeEmployeePopup() {
+     popupEmployee.classList.remove("open-popupEmployee");
+    }
 
-//   popupButtonEmployee.addEventListener('click', openEmployeePopup);
-//   document.querySelector('.close-popup-Employee-button').addEventListener('click', closeEmployeePopup);
-// });
+   popupButtonEmployee.addEventListener('click', openEmployeePopup);
+   document.querySelector('.close-popup-Employee-button').addEventListener('click', closeEmployeePopup);
+   cancelButtonEmployee.addEventListener('click', closeEmployeePopup);
+ });
 
 
 

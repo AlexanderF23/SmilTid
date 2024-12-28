@@ -1008,7 +1008,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="292" parent="1" name="smiltiddb">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-12-16.14:36:45</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-12-28.12:24:23</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="293" parent="1" name="mysql.infoschema">
@@ -1042,150 +1042,212 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="300" parent="292" name="timelogs">
+    <table id="300" parent="292" name="time_registration">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="301" parent="297" name="customerID">
+    <table id="301" parent="292" name="timelogs">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="302" parent="297" name="customerID">
       <AutoIncrement>3</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="302" parent="297" name="Name">
+    <column id="303" parent="297" name="Name">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="303" parent="297" name="PRIMARY">
+    <index id="304" parent="297" name="PRIMARY">
       <ColNames>customerID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="304" parent="297" name="PRIMARY">
+    <key id="305" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="305" parent="298" name="EmployeeID">
-      <AutoIncrement>3</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="306" parent="298" name="Name">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <index id="307" parent="298" name="PRIMARY">
-      <ColNames>EmployeeID</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="308" parent="298" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="309" parent="299" name="taskID">
-      <AutoIncrement>7</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <column id="310" parent="299" name="Name">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="311" parent="299" name="Description">
-      <Position>3</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="312" parent="299" name="customerID">
-      <Position>4</Position>
-      <StoredType>int|0s</StoredType>
-    </column>
-    <foreign-key id="313" parent="299" name="task_ibfk_1">
-      <ColNames>customerID</ColNames>
-      <RefColNames>customerID</RefColNames>
-      <RefTableName>customer</RefTableName>
-    </foreign-key>
-    <index id="314" parent="299" name="PRIMARY">
-      <ColNames>taskID</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="315" parent="299" name="CustomerID">
-      <ColNames>customerID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="316" parent="299" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="317" parent="300" name="TimeLogID">
+    <column id="306" parent="298" name="EmployeeID">
       <AutoIncrement>2</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="318" parent="300" name="TaskID">
+    <column id="307" parent="298" name="Name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <index id="308" parent="298" name="PRIMARY">
+      <ColNames>EmployeeID</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="309" parent="298" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="310" parent="299" name="taskID">
+      <AutoIncrement>8</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int|0s</StoredType>
+    </column>
+    <column id="311" parent="299" name="Name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <column id="312" parent="299" name="Description">
+      <Position>3</Position>
+      <StoredType>text|0s</StoredType>
+    </column>
+    <column id="313" parent="299" name="customerID">
+      <Position>4</Position>
+      <StoredType>int|0s</StoredType>
+    </column>
+    <foreign-key id="314" parent="299" name="task_ibfk_1">
+      <ColNames>customerID</ColNames>
+      <RefColNames>customerID</RefColNames>
+      <RefTableName>customer</RefTableName>
+    </foreign-key>
+    <index id="315" parent="299" name="PRIMARY">
+      <ColNames>taskID</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="316" parent="299" name="CustomerID">
+      <ColNames>customerID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="317" parent="299" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="318" parent="300" name="id">
+      <AutoIncrement>2</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int|0s</StoredType>
+    </column>
+    <column id="319" parent="300" name="customerID">
+      <Position>2</Position>
+      <StoredType>int|0s</StoredType>
+    </column>
+    <column id="320" parent="300" name="taskID">
+      <Position>3</Position>
+      <StoredType>int|0s</StoredType>
+    </column>
+    <column id="321" parent="300" name="date">
+      <Position>4</Position>
+      <StoredType>date|0s</StoredType>
+    </column>
+    <column id="322" parent="300" name="timeFrom">
+      <Position>5</Position>
+      <StoredType>time|0s</StoredType>
+    </column>
+    <column id="323" parent="300" name="timeTo">
+      <Position>6</Position>
+      <StoredType>time|0s</StoredType>
+    </column>
+    <column id="324" parent="300" name="comment">
+      <Position>7</Position>
+      <StoredType>text|0s</StoredType>
+    </column>
+    <foreign-key id="325" parent="300" name="time_registration_ibfk_1">
+      <ColNames>customerID</ColNames>
+      <RefColNames>customerID</RefColNames>
+      <RefTableName>customer</RefTableName>
+    </foreign-key>
+    <foreign-key id="326" parent="300" name="time_registration_ibfk_2">
+      <ColNames>taskID</ColNames>
+      <RefColNames>taskID</RefColNames>
+      <RefTableName>task</RefTableName>
+    </foreign-key>
+    <index id="327" parent="300" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="328" parent="300" name="customerID">
+      <ColNames>customerID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="329" parent="300" name="taskID">
+      <ColNames>taskID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="330" parent="300" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="331" parent="301" name="TimeLogID">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int|0s</StoredType>
+    </column>
+    <column id="332" parent="301" name="TaskID">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="319" parent="300" name="EmployeeID">
+    <column id="333" parent="301" name="EmployeeID">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="320" parent="300" name="StartTime">
+    <column id="334" parent="301" name="StartTime">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>datetime|0s</StoredType>
     </column>
-    <column id="321" parent="300" name="EndTime">
+    <column id="335" parent="301" name="EndTime">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>datetime|0s</StoredType>
     </column>
-    <column id="322" parent="300" name="TotalHours">
+    <column id="336" parent="301" name="TotalHours">
       <ColumnKind>generated-stored</ColumnKind>
       <DefaultExpression>(timestampdiff(MINUTE,`StartTime`,`EndTime`) / 60.0)</DefaultExpression>
       <Position>6</Position>
       <StoredType>decimal(5,2 digit)|0s</StoredType>
     </column>
-    <column id="323" parent="300" name="Comment">
+    <column id="337" parent="301" name="Comment">
       <Position>7</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <foreign-key id="324" parent="300" name="timelogs_ibfk_1">
+    <foreign-key id="338" parent="301" name="timelogs_ibfk_1">
       <ColNames>TaskID</ColNames>
-      <RefColNames>TaskID</RefColNames>
-      <RefTableName>tasks</RefTableName>
+      <RefColNames>taskID</RefColNames>
+      <RefTableName>task</RefTableName>
     </foreign-key>
-    <foreign-key id="325" parent="300" name="timelogs_ibfk_2">
+    <foreign-key id="339" parent="301" name="timelogs_ibfk_2">
       <ColNames>EmployeeID</ColNames>
       <RefColNames>EmployeeID</RefColNames>
       <RefTableName>employees</RefTableName>
     </foreign-key>
-    <index id="326" parent="300" name="PRIMARY">
+    <index id="340" parent="301" name="PRIMARY">
       <ColNames>TimeLogID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="327" parent="300" name="TaskID">
+    <index id="341" parent="301" name="TaskID">
       <ColNames>TaskID</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="328" parent="300" name="EmployeeID">
+    <index id="342" parent="301" name="EmployeeID">
       <ColNames>EmployeeID</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="329" parent="300" name="PRIMARY">
+    <key id="343" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
