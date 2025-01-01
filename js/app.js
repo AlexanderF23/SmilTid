@@ -349,6 +349,14 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchTasks(customerName);
   }
 
+  function getTimeFromString(timeString) {
+    const parts = timeString.split(':');
+    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+  }
+
+
+
+
   function fetchTasks(customerName) {
     fetch(`http://localhost:3000/tasks?customer=${encodeURIComponent(customerName)}`)
       .then(response => {
@@ -370,36 +378,100 @@ document.addEventListener('DOMContentLoaded', function () {
           jobList.appendChild(row);
         });
       })
+
       .catch(error => {
         console.error('Error fetching tasks:', error);
       });
   }
 
+
+  function toTimefromString(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+  }
+
   function fetchTaskDetails(taskId) {
+    const sTimeTable = document.getElementById('taskTime');
+    let rows = sTimeTable.getElementsByClassName('rowTask');
+    for (let i = 0; i < rows.length; i++) {
+      sTimeTable.removeChild(rows[i]);
+    }
+    const sTotalTime = document.getElementById('totalTime');
+    let timeRows = sTimeTable.getElementsByClassName('timeRow');
+    for (let i = 0; i < timeRows.length; i++) {
+      sTotalTime.removeChild(timeRows[i]);
+    }
+
+    document.getElementById('totalTime').getElementsByTagName('tbody')[0].innerHTML = '';
     fetch(`http://localhost:3000/taskDetails?taskId=${taskId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok ' + response.statusText);
         }
+        else if (response.status === 204) {
+          console.log('No task details found');
+          return null;
+        }
         return response.json();
       })
       .then(taskDetails => {
-        console.log('Task Details:', taskDetails); // Add this line to log the task details
-        const commentText = document.querySelector('.commentText');
-        const taskTimeUsedFrom = document.querySelector('.taskTimeUsedFrom');
-        const taskTimeUsedTo = document.querySelector('.taskTimeUsedTo');
-        commentText.textContent = taskDetails.comment;
-        taskTimeUsedFrom.textContent = taskDetails.startTime;
-        taskTimeUsedTo.textContent = taskDetails.endTime;
+        const sTimeTable = document.getElementById('taskTime');
+        if (taskDetails === null) {
+          alert('No time registrations found for this task.');
+          return;
+        }
 
+        taskDetails.forEach(taskDetail => {
+
+          const row = document.createElement('tr');
+          row.classList.add('rowTask');
+
+          const commentCell = document.createElement('td');
+          commentCell.textContent = taskDetail.comment;
+          commentCell.classList.add('commentText');
+          row.appendChild(commentCell);
+
+          const timeFromCell = document.createElement('td');
+          timeFromCell.textContent = taskDetail.startTime;
+          timeFromCell.classList.add('taskTimeUsedFrom');
+          row.appendChild(timeFromCell);
+
+          const timeToCell = document.createElement('td');
+          timeToCell.textContent = taskDetail.endTime;
+          timeToCell.classList.add('taskTimeUsedTo');
+          row.appendChild(timeToCell);
+
+          sTimeTable.getElementsByTagName('tbody')[0].appendChild(row);
+
+        });
         // Fetch and display all time registrations
-        fetchTimeRegistrations(taskId);
+       // fetchTimeRegistrations(taskId);
       })
+      .then(() => {
+          const timeTabel = document.getElementById('taskTime');
+            let rows = Array.from(timeTabel.getElementsByClassName('rowTask'));
+            let result = rows.reduce((total,row) => {
+              const taskTimeUsedFrom = row.querySelector('.taskTimeUsedFrom').innerText;
+              const taskTimeUsedTo = row.querySelector('.taskTimeUsedTo').innerText;
+              return getTimeFromString(taskTimeUsedTo) - getTimeFromString(taskTimeUsedFrom) + total;
+            } , 0);
+            const totalTime = document.getElementById('totalTime');
+            const row = document.createElement('tr');
+            row.classList.add('timeRow');
+            const cell = document.createElement('td');
+            cell.textContent = toTimefromString(result);
+            row.appendChild(cell);
+            totalTime.appendChild(row);
+        })
       .catch(error => {
         console.error('Error fetching task details:', error);
       });
   }
 
+
+
+  /* delet måske ikke brugbar
   function fetchTimeRegistrations(taskId) {
     fetch(`http://localhost:3000/timeRegistrations/${taskId}`)
       .then(response => {
@@ -432,6 +504,11 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error fetching time registrations:', error);
       });
   }
+*/
+
+
+
+
 
   // Popup window for deleting task
   const deleteTaskButton = document.querySelector('.deleteJob');

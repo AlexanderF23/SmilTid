@@ -222,12 +222,16 @@ app.get('/taskDetails', (req, res) => {
       return res.status(500).json({ error: 'Database error' });
     }
     if (results.length === 0) {
-      return res.status(404).json({ error: 'Task not found or no time registered.' });
+      return res.status(204).json({ error: 'Task not found or no time registered.' });
     }
-    res.status(200).json(results[0]); // Return the first (and likely only) result
+    res.status(200).json(results); // Return the first (and likely only) result
   });
 });
 
+
+
+
+/* delete måske ikke brugbar
 app.get('/timeRegistrations/:taskId', (req, res) => {
   const taskId = req.params.taskId;
   const query = `
@@ -243,3 +247,4 @@ app.get('/timeRegistrations/:taskId', (req, res) => {
     res.status(200).json(results);
   });
 });
+*/
