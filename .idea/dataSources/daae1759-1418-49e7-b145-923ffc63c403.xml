@@ -1093,7 +1093,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="310" parent="299" name="taskID">
-      <AutoIncrement>8</AutoIncrement>
+      <AutoIncrement>9</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1131,7 +1131,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="318" parent="300" name="id">
-      <AutoIncrement>2</AutoIncrement>
+      <AutoIncrement>7</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1167,6 +1167,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </foreign-key>
     <foreign-key id="326" parent="300" name="time_registration_ibfk_2">
       <ColNames>taskID</ColNames>
+      <OnDelete>cascade</OnDelete>
       <RefColNames>taskID</RefColNames>
       <RefTableName>task</RefTableName>
     </foreign-key>
@@ -1179,7 +1180,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <ColNames>customerID</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="329" parent="300" name="taskID">
+    <index id="329" parent="300" name="time_registration_ibfk_2">
       <ColNames>taskID</ColNames>
       <Type>btree</Type>
     </index>

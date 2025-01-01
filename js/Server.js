@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '23019912.Ax',
-  database: 'smiltiddb'
+  database: 'SmilTidDB'
 });
 
 db.connect((err) => {
@@ -116,13 +116,129 @@ app.post('/tasks', (req, res) => {
 });
 
 
+//delete task
+app.delete('/tasks/:taskId', (req, res) => {
+  const taskId = req.params.taskId;
+ console.log(req.params);
+  if (!taskId) {
+    return res.status(400).json({ error: 'Task ID is required.' });
+  }
+
+  // Delete related data first
+  const deleteRelatedDataQuery = 'DELETE FROM time_registration WHERE taskID = ?';
+  db.query(deleteRelatedDataQuery, [taskId], (err, results) => {
+    if (err) {
+      console.error('Error deleting related data:', err);
+      return res.status(500).json({ error: 'Database query error' });
+    }
+
+    // Delete the task
+    const deleteTaskQuery = 'DELETE FROM task WHERE taskID = ?';
+    db.query(deleteTaskQuery, [taskId], (err, results) => {
+      if (err) {
+        console.error('Error deleting task:', err);
+        return res.status(500).json({ error: 'Database query error' });
+      }
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: 'Task not found' });
+      }
+      res.status(200).json({ message: 'Task and related data deleted successfully' });
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //show customer data on index page
+/*
 app.get('/customers', (req, res) => {
   const query = 'SELECT customerID, Name FROM customer';
   db.query(query, (err, results) => {
     if (err) {
       console.error('Database query error:', err);
       return res.status(500).json({ error: 'Database error' });
+    }
+    res.status(200).json(results);
+  });
+});*/
+
+//get task data to jobsite
+app.get('/tasks', (req, res) => {
+  const customerName = req.query.customer;
+  if (!customerName) {
+    return res.status(400).json({ error: 'Customer name is required.' });
+  }
+
+  const query = `
+    SELECT t.name, t.taskID
+    FROM task t
+    JOIN customer c ON t.customerID = c.customerID
+    WHERE c.Name = ?;
+  `;
+
+  db.query(query, [customerName], (err, results) => {
+    if (err) {
+      console.error('Database query error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    res.status(200).json(results);
+  });
+});
+
+app.get('/taskDetails', (req, res) => {
+  const taskId = req.query.taskId;
+  if (!taskId) {
+    return res.status(400).json({ error: 'Task ID is required.' });
+  }
+
+  const query = `
+    SELECT comment, timeFrom AS startTime, timeTo AS endTime
+    FROM time_registration
+    WHERE taskID = ?;
+  `;
+
+  db.query(query, [taskId], (err, results) => {
+    if (err) {
+      console.error('Database query error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Task not found or no time registered.' });
+    }
+    res.status(200).json(results[0]); // Return the first (and likely only) result
+  });
+});
+
+app.get('/timeRegistrations/:taskId', (req, res) => {
+  const taskId = req.params.taskId;
+  const query = `
+    SELECT comment, timeFrom, timeTo
+    FROM time_registration
+    WHERE taskID = ?;
+  `;
+  db.query(query, [taskId], (err, results) => {
+    if (err) {
+      console.error('Database query error:', err);
+      return res.status(500).json({ error: 'Database query error' });
     }
     res.status(200).json(results);
   });

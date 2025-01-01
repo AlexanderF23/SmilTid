@@ -2,61 +2,88 @@
 <html lang="da">
 <head>
   <meta charset="UTF-8">
-  <title><Opgaver></title>
+  <title>Opgaver</title>
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/app.js"></script>
-  <script src="../js/db.js"></script>
-
+  <script src="../js/Server.js"></script>
 </head>
 <body>
-  <div class="grid-container">
+<div class="grid-container">
+  <div class="JobSite">
+    <h3 class="jobListName">Arbejdsopgaver</h3>
+    <h3 class="jobListCustomer"></h3>
+    <table class="jobList">
+      <tr>
+        <th>Opgave</th>
+      </tr>
+    </table>
+  </div> <!-- JobSite div -->
 
-    <div class="JobSite">
+  <div class="jobOptions">
+    <h3>Opgave info</h3>
+    <ul class="jobInfo">
+      <div class="buttonList">
+        <li><a href="timeRegister.html"><button class="addTime">tilføj tid</button></a></li>
+        <li><button class="deleteJob">Slet opgave</button></li>
+        <li><a href="index.html"><button class="backToIndex">Menu</button></a></li>
+      </div>
+    </ul>
 
-      <h3 class="jobListName">Arbejds opgaver</h3>
-      <table class="jobList">
+    <div class="tidClass">
+      <h3>Tid Brugt</h3>
+      <table class="timeTable">
         <tr>
-          <th>Opgave</th>
+          <th>Kommentar</th>
+          <th>Start tid</th>
+          <th>Slut tid</th>
         </tr>
         <tr>
-          <td>social medie content</td>
+          <td class="commentText"></td>
+          <td class="taskTimeUsedFrom"></td>
+          <td class="taskTimeUsedTo"></td>
+          <table class="sTimeTable"></table>
+        </tr>
       </table>
+    </div> <!-- tidClass div -->
 
-    </div>  <!-- JobSite div -->
+    <div class="sTid">
+      <h3>Samlet tid</h3>
+      <table class="sTimeTable">
+        <tr>
+          <th>Tid Brugt</th>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+      </table>
+    </div> <!-- sTid div -->
+  </div> <!-- jobOptions div -->
+</div> <!-- grid-container div -->
 
+<!-- Popup Window for Deleting Task -->
+<div id="deleteTaskPopup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h2>Delete Task</h2>
+    <select id="taskSelect">
+      <option value="">Select Task</option>
+    </select>
+    <button id="deleteTaskButton">Delete Task</button>
+    <div id="loadingIndicator" style="display:none;">Deleting...</div>
+    <div id="message"></div>
+  </div>
+</div>
 
-    <div class="jobOptions">
-
-      <h3>Opgave info</h3>
-        <ul class="jobInfo">
-          <div class="buttonList">
-            <li> <button class="addTime">tilføj tid</button> </li>
-            <li> <button class="editJob">Rediger opgave</button> </li>
-            <li> <button class="deleteJob">Slet opgave</button> </li>
-            <li> <button class="getTime">Se tid</button></li>
-            <li> <button class="jobDone">Opgave færdig</button> </li>
-          </div>
-        </ul>
-
-      <div class="tidClass">
-        <h3>Tid Brugt</h3>
-        <table class="timeTable">
-          <tr>
-            <th>Navn</th>
-            <th>Tid</th>
-            <th>Samlet tid</th>
-          </tr>
-          <tr>
-            <td>Lisette</td>
-            <td>2 timer</td>
-            <td>2 timer</td>
-        </table>
-      </div>  <!-- tidClass div -->
-
-    </div>  <!-- jobOptions div -->
-
-  </div> <!-- grid-container div -->
-
-
+<div id="createTaskPopup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h2>Create New Task</h2>
+    <form id="createTaskForm">
+      <label for="taskName">Task Name:</label>
+      <input type="text" id="taskName" name="taskName" required>
+      <button type="submit">Create Task</button>
+    </form>
+  </div>
+</div>
 </body>
 </html>
