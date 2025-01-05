@@ -241,58 +241,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-/*
-
-//popupEmployee
- document.addEventListener('DOMContentLoaded', function () {
-   let popupEmployee = document.getElementById('idPopupEmployee');
-   let popupButtonEmployee = document.getElementById('popupButtonEmployee');
-   let cancelButtonEmployee = document.getElementById('cancel');
-
-   function openEmployeePopup() {
-      popupEmployee.classList.add("open-popupEmployee");
-    }
-
-    function closeEmployeePopup() {
-     popupEmployee.classList.remove("open-popupEmployee");
-    }
-
-   popupButtonEmployee.addEventListener('click', openEmployeePopup);
-   document.querySelector('.close-popup-Employee-button').addEventListener('click', closeEmployeePopup);
-   cancelButtonEmployee.addEventListener('click', closeEmployeePopup);
- });
-
- */
-
- /*
-//display customer data on index page
-document.addEventListener('DOMContentLoaded', function () {
-  function fetchCustomers() {
-    fetch('http://localhost:3000/customers')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(customers => {
-        const taskTable = document.querySelector('.taskTable');
-        customers.forEach(customer => {
-          const row = document.createElement('tr');
-          const cell = document.createElement('td');
-          cell.textContent = customer.Name; // Ensure the property name matches the server response
-          row.appendChild(cell);
-          taskTable.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching customers:', error);
-      });
-  }
-
-  fetchCustomers();
-}); */
-
 
 //display customer name on jobsite
 document.addEventListener('DOMContentLoaded', function () {
@@ -471,45 +419,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-  /* delet måske ikke brugbar
-  function fetchTimeRegistrations(taskId) {
-    fetch(`http://localhost:3000/timeRegistrations/${taskId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(timeRegistrations => {
-        const sTimeTable = document.querySelector('.sTimeTable');
-        sTimeTable.innerHTML = `
-            <tr>
-              <th>Kommentar</th>
-              <th>Start tid</th>
-              <th>Slut tid</th>
-            </tr>
-          `; // Clear existing rows and add headers
-
-        timeRegistrations.forEach(registration => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-              <td>${registration.comment}</td>
-              <td>${registration.timeFrom}</td>
-              <td>${registration.timeTo}</td>
-            `;
-          sTimeTable.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching time registrations:', error);
-      });
-  }
-*/
-
-
-
-
-
   // Popup window for deleting task
   const deleteTaskButton = document.querySelector('.deleteJob');
   const deleteTaskPopup = document.getElementById('deleteTaskPopup');
@@ -640,17 +549,3 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-

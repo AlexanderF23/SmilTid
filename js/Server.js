@@ -148,39 +148,6 @@ app.delete('/tasks/:taskId', (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//show customer data on index page
-/*
-app.get('/customers', (req, res) => {
-  const query = 'SELECT customerID, Name FROM customer';
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Database query error:', err);
-      return res.status(500).json({ error: 'Database error' });
-    }
-    res.status(200).json(results);
-  });
-});*/
-
 //get task data to jobsite
 app.get('/tasks', (req, res) => {
   const customerName = req.query.customer;
@@ -231,20 +198,4 @@ app.get('/taskDetails', (req, res) => {
 
 
 
-/* delete måske ikke brugbar
-app.get('/timeRegistrations/:taskId', (req, res) => {
-  const taskId = req.params.taskId;
-  const query = `
-    SELECT comment, timeFrom, timeTo
-    FROM time_registration
-    WHERE taskID = ?;
-  `;
-  db.query(query, [taskId], (err, results) => {
-    if (err) {
-      console.error('Database query error:', err);
-      return res.status(500).json({ error: 'Database query error' });
-    }
-    res.status(200).json(results);
-  });
-});
-*/
+
